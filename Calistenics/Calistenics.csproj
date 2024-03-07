@@ -179,6 +179,10 @@
     <Compile Include="Migrations\202403052131041_MigrationDeleted.designer.cs">
       <DependentUpon>202403052131041_MigrationDeleted.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202403072057368_SeedingDbWithExercises.cs" />
+    <Compile Include="Migrations\202403072057368_SeedingDbWithExercises.designer.cs">
+      <DependentUpon>202403072057368_SeedingDbWithExercises.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\AppDbContext.cs" />
@@ -299,6 +303,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\202403052131041_MigrationDeleted.resx">
       <DependentUpon>202403052131041_MigrationDeleted.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202403072057368_SeedingDbWithExercises.resx">
+      <DependentUpon>202403072057368_SeedingDbWithExercises.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

@@ -15,9 +15,14 @@ namespace Calistenics.Controllers
         private readonly AppDbContext db = new AppDbContext();
 
         // GET: Excercises
-        public ActionResult Index()
+        public ActionResult Index(string searchExercise)
         {
-            return View(db.Excercises.ToList());
+            var exercises = from e in db.Excercises
+                           select e;
+            if(!String.IsNullOrEmpty(searchExercise)) {
+                exercises = exercises.Where(e => e.Name.Contains(searchExercise));
+            }
+            return View(exercises);
         }
 
         // GET: Excercises/Details/5
