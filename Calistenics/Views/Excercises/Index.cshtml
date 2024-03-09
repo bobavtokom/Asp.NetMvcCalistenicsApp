@@ -10,7 +10,9 @@
 <p>
     @Html.ActionLink("Create New", "Create")
     @using (Html.BeginForm()) {
-        <p>Title: @Html.TextBox("searchExercise")
+        <p>
+            Level: @Html.DropDownList("searchLevel", "All");
+            Title: @Html.TextBox("searchExercise")
  <input type="submit" value="search"/>   
     </p>
             }

@@ -1,26 +1,36 @@
-﻿using System;
+﻿using Calistenics.Models;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
 using System.Linq;
 using System.Net;
-using System.Web;
 using System.Web.Mvc;
-using Calistenics.Models;
 
-namespace Calistenics.Controllers
-{
+namespace Calistenics.Controllers {
     public class ExcercisesController : Controller
     {
         private readonly AppDbContext db = new AppDbContext();
 
         // GET: Excercises
-        public ActionResult Index(string searchExercise)
+        public ActionResult Index(string searchExercise, string searchLevel)
         {
             var exercises = from e in db.Excercises
                            select e;
+            var levelList = new List<string>();
+
+            var levelsQuery = from e in db.Excercises 
+                         orderby e.Level 
+                         select e.Level;
+
+            levelList.AddRange(levelsQuery.Distinct());
+            ViewBag.searchLevel = new SelectList(levelList);
+            
             if(!String.IsNullOrEmpty(searchExercise)) {
                 exercises = exercises.Where(e => e.Name.Contains(searchExercise));
+            }
+            if (!String.IsNullOrEmpty(searchLevel)) {
+                exercises = exercises.Where(e => e.Level == searchLevel);
             }
             return View(exercises);
         }
