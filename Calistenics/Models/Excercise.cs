@@ -11,5 +11,7 @@ namespace Calistenics.Models {
         public string Name { get; set;}
         public string Description { get; set;}
         public string Level { get; set;}
+        [Url(ErrorMessage = "Invalid URL format. Please include 'http://' or 'https://'")]
+        public string Url { get; set; }
     }
 }

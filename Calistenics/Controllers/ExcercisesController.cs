@@ -5,6 +5,7 @@ using System.Data;
 using System.Data.Entity;
 using System.Linq;
 using System.Net;
+using System.Web;
 using System.Web.Mvc;
 
 namespace Calistenics.Controllers {
@@ -61,17 +62,43 @@ namespace Calistenics.Controllers {
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Name,Description,Level")] Excercise excercise)
-        {
-            if (ModelState.IsValid)
-            {
-                db.Excercises.Add(excercise);
-                db.SaveChanges();
-                return RedirectToAction("Index");
+        public ActionResult Create([Bind(Include = "Id,Name,Description,Level,Url")] Excercise excercise) {
+            if (ModelState.IsValid) {
+                // Additional validation: check if the URL is a valid YouTube URL and extract video ID
+                string videoId = GetYouTubeVideoId(excercise.Url);
+                if (!string.IsNullOrEmpty(videoId)) {
+                    // If the URL is valid, proceed with saving the exercise
+                    excercise.Url = videoId; // Save only the video ID, not the entire URL
+                    db.Excercises.Add(excercise);
+                    db.SaveChanges();
+                    return RedirectToAction("Index");
+                  
+                } else {
+                    // If the URL is not valid, add a model error
+                    ModelState.AddModelError("Url", "Invalid YouTube URL");
+                }
             }
-
+            
             return View(excercise);
         }
+
+        // Helper method to extract YouTube video ID from URL
+        private string GetYouTubeVideoId(string url) {
+            try {
+                // Your logic to extract video ID from URL
+                // This could be done using regex or by parsing the URL
+                // For simplicity, let's assume the URL format is consistent
+                // and the video ID is after the "v=" parameter
+                var uri = new Uri(url);
+                var queryString = uri.Query;
+                var queryDictionary = HttpUtility.ParseQueryString(queryString);
+                return queryDictionary["v"];
+            }
+            catch {
+                return null;
+            }
+        }
+
 
         // GET: Excercises/Edit/5
         public ActionResult Edit(int? id)
@@ -93,7 +120,7 @@ namespace Calistenics.Controllers {
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Name,Description,Level")] Excercise excercise)
+        public ActionResult Edit([Bind(Include = "Id,Name,Description,Level,Url")] Excercise excercise)
         {
             if (ModelState.IsValid)
             {
