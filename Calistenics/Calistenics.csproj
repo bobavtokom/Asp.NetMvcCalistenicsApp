@@ -187,6 +187,10 @@
     <Compile Include="Migrations\202403112042403_UrlPropertyAddedToExerciseModel.designer.cs">
       <DependentUpon>202403112042403_UrlPropertyAddedToExerciseModel.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202403192120551_ValidationAddedOnDescriptionPropInExerciseModel.cs" />
+    <Compile Include="Migrations\202403192120551_ValidationAddedOnDescriptionPropInExerciseModel.Designer.cs">
+      <DependentUpon>202403192120551_ValidationAddedOnDescriptionPropInExerciseModel.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\AppDbContext.cs" />
@@ -313,6 +317,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202403112042403_UrlPropertyAddedToExerciseModel.resx">
       <DependentUpon>202403112042403_UrlPropertyAddedToExerciseModel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202403192120551_ValidationAddedOnDescriptionPropInExerciseModel.resx">
+      <DependentUpon>202403192120551_ValidationAddedOnDescriptionPropInExerciseModel.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
